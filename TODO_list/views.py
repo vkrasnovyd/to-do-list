@@ -70,3 +70,14 @@ class TaskUpdateView(generic.UpdateView):
         context = super(TaskUpdateView, self).get_context_data()
         context["form_object_name"] = "task"
         return context
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    template_name = "confirm_delete.html"
+    success_url = reverse_lazy("todo_list:tasks_list")
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskDeleteView, self).get_context_data()
+        context["object_name"] = "task"
+        return context
