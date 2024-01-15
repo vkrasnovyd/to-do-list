@@ -5,7 +5,7 @@
 {% block content %}
   <h1>
     Tasks
-    <a href="#" class="btn btn-success">+</a>
+    <a href="{% url 'todo_list:tasks_create' %}?next={% url 'todo_list:tasks_list' %}" class="btn btn-success">+</a>
   </h1>
   {% if task_list %}
     {% for task in task_list %}
