@@ -1,0 +1,54 @@
+{% extends 'base.htm' %}
+
+{% block title %}tasks{% endblock %}
+
+{% block content %}
+  <h1>
+    Tasks
+    <a href="#" class="btn btn-success">+</a>
+  </h1>
+  {% if task_list %}
+    {% for task in task_list %}
+      <hr>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            <h2 class="h4">
+              {{ task.content }}
+                {% if not task.is_completed %}
+                  <span class="text-success">Done</span>
+                {% else %}
+                  <span class="text-danger">Not done</span>
+                {% endif %}
+            </h2>
+            <p>Created at: {{ task.created_at|date }}, {{ task.created_at|date }}</p>
+
+            {% if task.deadline %}
+              <p class="text-danger">Due to: {{ task.deadline|date }}, {{ task.deadline|date }}</p>
+            {% endif %}
+
+            {% if task.tags.all %}
+              Tags:
+              {% for tag in task.tags %}
+                <span class="badge">tag</span>
+              {% endfor %}
+            {% endif %}
+            Actions:
+            <a href="#">Update</a>
+            <a href="#">Delete</a>
+          </div>
+
+          <div class="col-sm-3">
+            {% if task.is_completed %}
+              <a href="#" class="btn btn-light">Undo</a>
+            {% else %}
+              <a href="#" class="btn btn-success">Complete</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    There are currently no tasks.
+  {% endif %}
+{% endblock %}

@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from TODO_list.forms import TagForm
-from TODO_list.models import Tag
+from TODO_list.models import Tag, Task
 
 
 class TagListView(generic.ListView):
@@ -42,3 +42,7 @@ class TagDeleteView(generic.DeleteView):
         context = super(TagDeleteView, self).get_context_data()
         context["object_name"] = "tag"
         return context
+
+
+class TaskListView(generic.ListView):
+    model = Task
