@@ -59,3 +59,14 @@ class TaskCreateView(generic.CreateView):
         context["form_object_name"] = "task"
         return context
 
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "base_form.html"
+    success_url = reverse_lazy("todo_list:tasks_list")
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskUpdateView, self).get_context_data()
+        context["form_object_name"] = "task"
+        return context

@@ -5,7 +5,7 @@
 {% block content %}
   <h1>
     Tasks
-    <a href="{% url 'todo_list:tasks_create' %}?next={% url 'todo_list:tasks_list' %}" class="btn btn-success">+</a>
+    <a href="{% url 'todo_list:tasks_create' %}?next={% url 'todo_list:tasks_list' %}" class="btn btn-primary">+</a>
   </h1>
   {% if task_list %}
     {% for task in task_list %}
@@ -15,27 +15,29 @@
           <div class="col-sm-9">
             <h2 class="h4">
               {{ task.content }}
-                {% if not task.is_completed %}
+                {% if task.is_completed %}
                   <span class="text-success">Done</span>
                 {% else %}
                   <span class="text-danger">Not done</span>
                 {% endif %}
             </h2>
-            <p>Created at: {{ task.created_at|date }}, {{ task.created_at|date }}</p>
+            <p>Created at: {{ task.created_at|date }}, {{ task.created_at|time }}</p>
 
             {% if task.deadline %}
-              <p class="text-danger">Due to: {{ task.deadline|date }}, {{ task.deadline|date }}</p>
+              <p class="text-danger">Due to: {{ task.deadline|date }}, {{ task.deadline|time }}</p>
             {% endif %}
 
             {% if task.tags.all %}
               Tags:
-              {% for tag in task.tags %}
-                <span class="badge">tag</span>
+              {% for tag in task.tags.all %}
+                <span class="badge badge-pill badge-info">{{ tag.name }}</span>
               {% endfor %}
             {% endif %}
-            Actions:
-            <a href="#">Update</a>
-            <a href="#">Delete</a>
+            <p class="mt-3">
+              Actions:
+              <a href="{% url 'todo_list:tasks_update' pk=task.id %}?next={% url 'todo_list:tasks_list' %}">Update</a>
+              <a href="#">Delete</a>
+            </p>
           </div>
 
           <div class="col-sm-3">

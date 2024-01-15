@@ -12,4 +12,19 @@ class TagForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = "__all__"
+        fields = ["content", "deadline", "tags"]
+
+    deadline = forms.SplitDateTimeField(
+        required=False,
+        widget=forms.SplitDateTimeWidget(
+            date_attrs={"type": "date"},
+            date_format="%Y-%m-%d",
+            time_attrs={"type": "time"},
+            time_format="%H:%M"
+        )
+    )
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
