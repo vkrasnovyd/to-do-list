@@ -5,7 +5,7 @@
 {% block content %}
   <h1>
     Tags
-    <a href="#" class="btn btn-success">+</a>
+    <a href="{% url 'todo_list:tags_create' %}?next={% url 'todo_list:tags_list' %}" class="btn btn-success">+</a>
   </h1>
   {% if tag_list %}
     <table class="table">
