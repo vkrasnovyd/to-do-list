@@ -31,3 +31,14 @@ class TagUpdateView(generic.UpdateView):
         context = super(TagUpdateView, self).get_context_data()
         context["form_object_name"] = "tag"
         return context
+
+
+class TagDeleteView(generic.DeleteView):
+    model = Tag
+    template_name = "confirm_delete.html"
+    success_url = reverse_lazy("todo_list:tags_list")
+
+    def get_context_data(self, **kwargs):
+        context = super(TagDeleteView, self).get_context_data()
+        context["object_name"] = "tag"
+        return context

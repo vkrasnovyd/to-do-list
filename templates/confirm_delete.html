@@ -1,0 +1,17 @@
+{% extends 'base.htm' %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+  Delete {{ object_name }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="h2">Delete {{ object_name }}?</h1>
+  <p class="mb-0">Are you sure that you want to delete this {{ object_name }} from the database?</p>
+  <form action="" method="post" class="pt-3">
+    {% csrf_token %}
+    <input type="submit" value="Yes" class="btn btn-danger">
+    <a href="{{ request.GET.next }}" class="btn btn-gray-300">Cancel</a>
+  </form>
+{% endblock %}
