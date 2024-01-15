@@ -1,3 +1,6 @@
+from django import views
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -81,3 +84,12 @@ class TaskDeleteView(generic.DeleteView):
         context = super(TaskDeleteView, self).get_context_data()
         context["object_name"] = "task"
         return context
+
+
+class TaskStatusToggleView(views.View):
+    @staticmethod
+    def get(request, pk):
+        task = get_object_or_404(Task, id=pk)
+        task.is_completed = not task.is_completed
+        task.save()
+        return HttpResponseRedirect(reverse_lazy("todo_list:tasks_list"))
