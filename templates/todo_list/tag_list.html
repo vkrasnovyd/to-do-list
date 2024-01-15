@@ -19,7 +19,7 @@
       <tr>
         <td>{{ tag.id }}</td>
         <td>{{ tag.name }}</td>
-        <td><a href="#" class="btn btn-info">Update</a></td>
+        <td><a href="{% url 'todo_list:tags_update' pk=tag.id %}?next={% url 'todo_list:tags_list' %}" class="btn btn-info">Update</a></td>
         <td><a href="#" class="btn btn-danger">Delete</a></td>
       </tr>
     {% endfor %}

@@ -19,3 +19,15 @@ class TagCreateView(generic.CreateView):
         context = super(TagCreateView, self).get_context_data()
         context["form_object_name"] = "tag"
         return context
+
+
+class TagUpdateView(generic.UpdateView):
+    model = Tag
+    form_class = TagForm
+    template_name = "base_form.html"
+    success_url = reverse_lazy("todo_list:tags_list")
+
+    def get_context_data(self, **kwargs):
+        context = super(TagUpdateView, self).get_context_data()
+        context["form_object_name"] = "tag"
+        return context
