@@ -16,7 +16,7 @@ class TagCreateView(generic.CreateView):
     model = Tag
     form_class = TagForm
     template_name = "base_form.html"
-    success_url = reverse_lazy("todo_list:tags_list")
+    success_url = reverse_lazy("todo_list:tag_list")
 
     def get_context_data(self, **kwargs):
         context = super(TagCreateView, self).get_context_data()
@@ -28,7 +28,7 @@ class TagUpdateView(generic.UpdateView):
     model = Tag
     form_class = TagForm
     template_name = "base_form.html"
-    success_url = reverse_lazy("todo_list:tags_list")
+    success_url = reverse_lazy("todo_list:tag_list")
 
     def get_context_data(self, **kwargs):
         context = super(TagUpdateView, self).get_context_data()
@@ -39,7 +39,7 @@ class TagUpdateView(generic.UpdateView):
 class TagDeleteView(generic.DeleteView):
     model = Tag
     template_name = "confirm_delete.html"
-    success_url = reverse_lazy("todo_list:tags_list")
+    success_url = reverse_lazy("todo_list:tag_list")
 
     def get_context_data(self, **kwargs):
         context = super(TagDeleteView, self).get_context_data()
@@ -55,7 +55,7 @@ class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
     template_name = "base_form.html"
-    success_url = reverse_lazy("todo_list:tasks_list")
+    success_url = reverse_lazy("todo_list:task_list")
 
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data()
@@ -67,7 +67,7 @@ class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "base_form.html"
-    success_url = reverse_lazy("todo_list:tasks_list")
+    success_url = reverse_lazy("todo_list:task_list")
 
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data()
@@ -78,7 +78,7 @@ class TaskUpdateView(generic.UpdateView):
 class TaskDeleteView(generic.DeleteView):
     model = Task
     template_name = "confirm_delete.html"
-    success_url = reverse_lazy("todo_list:tasks_list")
+    success_url = reverse_lazy("todo_list:task_list")
 
     def get_context_data(self, **kwargs):
         context = super(TaskDeleteView, self).get_context_data()
@@ -92,4 +92,4 @@ class TaskStatusToggleView(views.View):
         task = get_object_or_404(Task, id=pk)
         task.is_completed = not task.is_completed
         task.save()
-        return HttpResponseRedirect(reverse_lazy("todo_list:tasks_list"))
+        return HttpResponseRedirect(reverse_lazy("todo_list:task_list"))
